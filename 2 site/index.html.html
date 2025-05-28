@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("3Rv5sUDoRcguVJagc");
+    })();
+  </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .login-box {
+      background-color: rgba(48, 107, 175, 0.95);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      margin: auto;
+    }
+.login-box h1 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .logo {
+      margin-bottom: 1rem;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+ button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .error {
+      margin-top: 12px;
+      color: red;
+      font-weight: bold;
+      animation: shake 0.3s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+    }
+
+    @media (max-width: 500px) {
+      .login-box {
+        margin: 20px;
+      }
+}
+
+    .site-footer {
+      background-color: #003087;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+    }
+
+    .site-footer .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .site-footer a {
+      color: white;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+
+    .site-footer a:hover {
+      text-decoration: none;
+      color: #cce0ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="logo">
+      <img src="logo 1.jpg" alt="Logo" />
+    </div>
+    <h1>Request Access To ANSTECH official website</h1>
+    <input type="text" id="name" placeholder="Your Name" />
+    <input type="email" id="email" placeholder="Your Email" />
+    <button onclick="sendCode()">Send Password</button>
+
+    <hr style="margin: 20px 0;">
+
+    <input type="password" id="password" placeholder="Enter Password" />
+    <button onclick="login()">Login</button>
+
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="#">Copyright Notice</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Support ANSTECH & Nana Awusi</a> |
+    </div>
+    <p>© 2025 Nana Awusi Website Creation In Ghana</p>
+  </footer>
+<script>
+    function sendCode() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      errorMsg.innerText = "";
+
+      if (!name || !email) {
+        errorMsg.innerText = "Please fill in both fields.";
+        return;
+      }
+
+      emailjs.send("service_43m0iia", "_ejs-test-mail-service_", {
+        to_name: name,
+        to_email: email,
+        message: "Your access password is: awusi.anstech"
+      }).then(function(response) {
+        alert("Password sent to your email.");
+      }, function(error) {
+        errorMsg.innerText = "Failed to send email. Try again.";
+        console.error("EmailJS error:", error);
+      });
+    }
+ function login() {
+      const enteredPassword = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      errorMsg.innerText = "";
+
+      const correctPassword = "awusi.anstech";
+
+      if (enteredPassword === correctPassword) {
+        alert("Access granted to Nana Awusi's official website for ANSTECH!");
+        window.location.href = "https://nana73542.github.io/website-develope-master-Awusi/";
+      } else {
+        errorMsg.innerText = "Incorrect password.";
+      }
+    }
+  </script>
+</body>
+</html>
